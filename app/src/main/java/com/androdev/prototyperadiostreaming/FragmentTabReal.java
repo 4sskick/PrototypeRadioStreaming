@@ -22,8 +22,6 @@ public class FragmentTabReal extends Fragment {
             @Override
             public void run() {
                 getActivity().finish();
-                Intent intent = new Intent(getActivity(), MainScreenActivity.class);
-                startActivity(intent);
             }
         }, 50);
 

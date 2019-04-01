@@ -12,11 +12,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
+
+
         <activity
-            android:name=".MainScreenActivity"
+            android:name=".view.activity.front_screen.FrontActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,15 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainTabActivity"
             android:label="@string/title_activity_main_tab" />
+
         <activity
             android:name=".TabRealActivity"
             android:label="@string/title_activity_tab_real" />
 
-        <!--CUSTOM HERE-->
-        <activity android:name=".view.front_screen.FrontActivity"></activity>
+        <activity android:name=".view.activity.main_screen.MainScreenActivity" />
+
     </application>
 
 </manifest>

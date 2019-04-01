@@ -23,6 +23,12 @@ public class TabRealActivity extends
     private static final String CURRENT_TAB = "current_tab";
     private int mCurrent_tab = 0;
 
+    public static void startActivity(AppCompatActivity activity, int toTab) {
+        Intent a = new Intent(activity, TabRealActivity.class);
+        a.putExtra(Intent.EXTRA_TEXT, toTab);
+        activity.startActivity(a);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
