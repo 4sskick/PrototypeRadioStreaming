@@ -1,8 +1,11 @@
 package com.androdev.prototyperadiostreaming.view.activity.main_screen;
 
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.androdev.prototyperadiostreaming.R;
 import com.androdev.prototyperadiostreaming.adapter.GenericPagerAdapter;
@@ -17,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Septian Adi Wijaya on 01/04/19
@@ -25,7 +30,15 @@ public class MainScreenActivity extends BaseActivity {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
     @BindView(R.id.layout_bottom)
-    ConstraintLayout layoutBottom;
+    FrameLayout layoutBottom;
+    @BindView(R.id.action_home)
+    LinearLayout actionHome;
+    @BindView(R.id.action_live)
+    LinearLayout actionLive;
+    @BindView(R.id.action_news)
+    LinearLayout actionNews;
+    @BindView(R.id.action_info)
+    LinearLayout actionInfo;
 
     private int mToTab = 0;
 
@@ -50,6 +63,21 @@ public class MainScreenActivity extends BaseActivity {
         if (getIntent() != null) {
             if (getIntent().hasExtra(Intent.EXTRA_TEXT)) {
                 mToTab = getIntent().getIntExtra(Intent.EXTRA_TEXT, mToTab);
+
+                switch (mToTab) {
+                    case 0:
+                        actionHome.setSelected(true);
+                        break;
+                    case 1:
+                        actionLive.setSelected(true);
+                        break;
+                    case 2:
+                        actionNews.setSelected(true);
+                        break;
+                    case 3:
+                        actionInfo.setSelected(true);
+                        break;
+                }
             }
         }
 
@@ -79,5 +107,35 @@ public class MainScreenActivity extends BaseActivity {
         };
         viewPager.addOnPageChangeListener(onPageChangeListener);
         viewPager.setCurrentItem(mToTab);
+    }
+
+    @OnClick({R.id.action_home, R.id.action_live, R.id.action_news, R.id.action_info})
+    public void onViewClicked(View view) {
+
+        actionHome.setSelected(false);
+        actionLive.setSelected(false);
+        actionNews.setSelected(false);
+        actionInfo.setSelected(false);
+
+        switch (view.getId()) {
+            case R.id.action_home:
+                mToTab = 0;
+                actionHome.setSelected(true);
+                break;
+            case R.id.action_live:
+                mToTab = 1;
+                actionLive.setSelected(true);
+                break;
+            case R.id.action_news:
+                mToTab = 2;
+                actionNews.setSelected(true);
+                break;
+            case R.id.action_info:
+                mToTab = 3;
+                actionInfo.setSelected(true);
+                break;
+        }
+        viewPager.setCurrentItem(mToTab);
+
     }
 }

@@ -94,7 +94,7 @@ public class FragmentTabReal2 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 url_radio = ((TextView)view.findViewById(R.id.urlItem)).getText().toString();
-                titleRadio = ((TextView)view.findViewById(R.id.itemname)).getText().toString();
+                titleRadio = ((TextView)view.findViewById(R.id.itemName)).getText().toString();
 
                 radioUrl.setText(url_radio);
                 /*Toast.makeText(getActivity(), url_radio, Toast.LENGTH_SHORT).show();*/

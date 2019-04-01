@@ -48,10 +48,10 @@ public class CustomListAdapter extends BaseAdapter {
             inflater = (LayoutInflater) fragment.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.list_station, null);
+            convertView = inflater.inflate(R.layout.i_live, null);
         }
 
-        TextView title = (TextView)convertView.findViewById(R.id.itemname);
+        TextView title = (TextView)convertView.findViewById(R.id.itemName);
         TextView url_description = (TextView)convertView.findViewById(R.id.urlItem);
 
         RadioStation rs = listStation.get(position);
