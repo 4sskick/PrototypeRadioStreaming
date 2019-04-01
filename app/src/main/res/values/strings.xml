@@ -6,7 +6,7 @@
     <string name="title_activity_main_screen">MainScreenActivity</string>
     <string name="title_activity_main_tab">MainTabActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment Main</string>
     <string name="title_activity_tab_real">TabRealActivity</string>
 

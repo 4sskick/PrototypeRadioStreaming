@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class TabRealActivity extends ActionBarActivity {
+public class TabRealActivity extends
+        AppCompatActivity {
 
     private FragmentTabHost mTabHost;
 

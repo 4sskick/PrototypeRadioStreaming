@@ -2,7 +2,7 @@ package com.androdev.prototyperadiostreaming;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +26,7 @@ import java.io.IOException;
 import app.AppController;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     private String url_radio = "http://url.radiostreamlive.com/radiocountrylive/low_ad.asx";
     //private String url_json = "https://github.com/jcheype/NabAlive/blob/master/applications/application-radio/src/main/resources/radio.json";
