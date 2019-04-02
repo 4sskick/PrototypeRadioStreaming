@@ -1,5 +1,6 @@
 package com.androdev.prototyperadiostreaming.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragment extends Fragment {
 
+    private ProgressDialog mProgressDialog;
     private String fragmentTitle;
 
     protected abstract int getLayout();
@@ -37,5 +39,16 @@ public abstract class BaseFragment extends Fragment {
 
     public void setFragmentTitle(String fragmentTitle) {
         this.fragmentTitle = fragmentTitle;
+    }
+
+    public void showLoading() {
+        hideLoading();
+        mProgressDialog = ((BaseActivity) getActivity()).showLoading();
+    }
+
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
     }
 }

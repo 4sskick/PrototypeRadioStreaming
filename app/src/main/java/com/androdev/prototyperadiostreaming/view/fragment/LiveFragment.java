@@ -1,15 +1,11 @@
 package com.androdev.prototyperadiostreaming.view.fragment;
 
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +30,7 @@ import java.util.List;
 
 import app.AppController;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import model.RadioStation;
 
 /**
@@ -79,6 +73,15 @@ public class LiveFragment extends BaseFragment {
         pbMonitor.setVisibility(View.INVISIBLE);
         pbMonitor.setIndeterminate(true);
 
+        if (url_radio == null || player == null) {
+            btnStop.setEnabled(false);
+            btnPlay.setEnabled(true);
+            stateButton();
+
+            pbMonitor.setVisibility(View.INVISIBLE);
+            player = new MediaPlayer();
+        }
+
         player.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -88,11 +91,20 @@ public class LiveFragment extends BaseFragment {
         });
 
         data = new ArrayList<>();
-        adapter = new LiveAdapter(data);
+        adapter = new LiveAdapter(data, model -> {
+            url_radio = model.getUrl_title();
+
+            tvRadioUrl.setText(url_radio);
+            stopPlaying();
+
+//            Log.e("tagReq", "setup: " + model.toString());
+
+        });
         listRadio.setLayoutManager(new LinearLayoutManager(getContext()));
         listRadio.setAdapter(adapter);
 
         setupRequest();
+        showLoading();
     }
 
     private void startPlaying() {
@@ -169,12 +181,11 @@ public class LiveFragment extends BaseFragment {
                         rs.setTitle(obj.getString("name"));
                         rs.setUrl_title(obj.getString("values"));
 
-                        /*added in listview*/
-                        listStation.add(rs);
+                        data.add(rs);
                     }
                     Log.d("DEBUG", reqResponse.toString());
-                    adapter.notifyDataSetChanged();
-                    hideDialog();
+                    adapter.setData(data);
+                    hideLoading();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(),
@@ -189,7 +200,7 @@ public class LiveFragment extends BaseFragment {
                 VolleyLog.d("DEBUG", "Error: " + error.getMessage());
                 Toast.makeText(getActivity(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
-                hideDialog();
+                hideLoading();
             }
         });
         // Adding request to request queue

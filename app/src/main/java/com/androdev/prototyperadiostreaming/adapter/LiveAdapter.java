@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androdev.prototyperadiostreaming.R;
@@ -13,6 +14,8 @@ import com.androdev.prototyperadiostreaming.R;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import model.RadioStation;
 
 /**
@@ -20,10 +23,12 @@ import model.RadioStation;
  */
 public class LiveAdapter extends RecyclerView.Adapter<LiveAdapter.LiveViewHolder> {
 
+    private OnItemListener listener;
     private List<RadioStation> data;
 
-    public LiveAdapter(List<RadioStation> data) {
+    public LiveAdapter(List<RadioStation> data, OnItemListener listener) {
         this.data = data;
+        this.listener = listener;
     }
 
     @NonNull
@@ -43,6 +48,11 @@ public class LiveAdapter extends RecyclerView.Adapter<LiveAdapter.LiveViewHolder
         return data.size();
     }
 
+    public void setData(List<RadioStation> data) {
+        this.data = data;
+        notifyDataSetChanged();
+    }
+
     public class LiveViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.itemName)
@@ -52,13 +62,24 @@ public class LiveAdapter extends RecyclerView.Adapter<LiveAdapter.LiveViewHolder
 
         public LiveViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         void bind() {
             RadioStation model = data.get(getAdapterPosition());
+            if (model != null) {
+                tvItemName.setText(model.getTitle());
+                tvItemUrl.setText(model.getUrl_title());
+            }
+        }
 
-            tvItemName.setText(model.getTitle());
-            tvItemUrl.setText(model.getUrl_title());
+        @OnClick({R.id.layout_item})
+        void onViewClicked(View view) {
+            switch (view.getId()) {
+                case R.id.layout_item:
+                    listener.onItemClicked(data.get(getAdapterPosition()));
+                    break;
+            }
         }
     }
 
