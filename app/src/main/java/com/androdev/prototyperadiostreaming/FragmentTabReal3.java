@@ -227,7 +227,7 @@ public class FragmentTabReal3 extends Fragment {
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater) getActivity()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.list_news, null);
+                view = inflater.inflate(R.layout.i_news, null);
 
                 holder = new ViewHolder();
                 view.setTag(holder);

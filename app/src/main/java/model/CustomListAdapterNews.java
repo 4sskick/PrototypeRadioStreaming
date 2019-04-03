@@ -54,7 +54,7 @@ public class CustomListAdapterNews extends BaseAdapter {
             inflater = (LayoutInflater) fragment.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-            convertView = inflater.inflate(R.layout.list_news, null);
+            convertView = inflater.inflate(R.layout.i_news, null);
         }
 
         NetworkImageView thumbnailImg = (NetworkImageView)convertView.findViewById(R.id.icon);
